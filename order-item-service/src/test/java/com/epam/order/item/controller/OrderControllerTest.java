@@ -12,7 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import com.epam.order.item.controller.OrderController;
+import com.epam.order.item.controller.OrderItemController;
 import com.epam.order.item.entity.OrderItem;
 import com.epam.order.item.repository.OrderItemRepostiroty;
 import com.epam.order.item.service.OrderItemService;
@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 
  
 @RunWith(SpringRunner.class)
-@WebMvcTest(OrderController.class)
+@WebMvcTest(OrderItemController.class)
 public class OrderControllerTest {
 
     @Autowired

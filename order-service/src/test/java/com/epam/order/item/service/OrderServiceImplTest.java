@@ -8,6 +8,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.epam.order.entity.Order;
+import com.epam.order.model.OrderResponse;
 import com.epam.order.repository.OrderRepostiroty;
 import com.epam.order.service.impl.OrderServiceImpl;
 
@@ -32,12 +33,12 @@ public class OrderServiceImplTest {
         List<Order> orderList = new ArrayList<>();
         Order order = new Order();
         order.setId("1");
-      //  order.setDescription("order_desc");
+       
         orderList.add(order);
 
         Mockito.when(orderRepostiroty.findAll()).thenReturn(orderList);
 
-        List<Order> returnedOrderList = orderService.getAllOrder();
+        List<OrderResponse> returnedOrderList = orderService.getAllOrder();
         assertEquals(returnedOrderList.size(), orderList.size());
 
 

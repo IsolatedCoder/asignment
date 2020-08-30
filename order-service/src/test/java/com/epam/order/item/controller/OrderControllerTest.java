@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.epam.order.controller.OrderController;
 import com.epam.order.entity.Order;
+import com.epam.order.model.OrderResponse;
 import com.epam.order.repository.OrderRepostiroty;
 import com.epam.order.service.OrderService;
 
@@ -37,9 +38,9 @@ public class OrderControllerTest {
     @Test
     public void getAllOrderAPI() throws Exception {
 
-        List<Order> orderList = new ArrayList<>();
-        Order order = new Order();
-        order.setId("1");
+        List<OrderResponse> orderList = new ArrayList<>();
+        OrderResponse order = new OrderResponse();
+        order.setShippingAddress("address");
         order.setCustomerName("customer");
         orderList.add(order);
 

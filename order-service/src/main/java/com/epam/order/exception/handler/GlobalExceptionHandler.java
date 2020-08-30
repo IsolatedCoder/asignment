@@ -4,6 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import com.epam.order.exception.model.OrderNotFoundException;
+
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +16,11 @@ public class GlobalExceptionHandler {
     private static final Logger LOGGER =LoggerFactory.getLogger(GlobalExceptionHandler.class);
     
     
+    @ExceptionHandler({ OrderNotFoundException.class })
+    public ResponseEntity<String> handleRunTimeException(OrderNotFoundException e) {
+	 
+	return error(HttpStatus.NO_CONTENT, e);
+    }
     
     @ExceptionHandler({ RuntimeException.class })
     public ResponseEntity<String> handleRunTimeException(RuntimeException e) {

@@ -3,6 +3,7 @@ package com.epam.order.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import com.epam.order.entity.Order;
@@ -19,6 +20,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api")
+@Validated
 public class OrderController {
 
 
@@ -31,12 +33,12 @@ public class OrderController {
     }
 
     @GetMapping("/order")
-    public ResponseEntity<List<Order>> getAllOrder() {
+    public ResponseEntity<List<OrderResponse>> getAllOrder() {
         return new ResponseEntity<>(orderService.getAllOrder(), HttpStatus.OK);
     }
 
     @GetMapping("/order/{id}")
-    public ResponseEntity<OrderResponse> getOrderById(@PathVariable String id) {
+    public ResponseEntity<OrderResponse> getOrderById(@PathVariable(name ="sid", required =true) String id) {
         return new ResponseEntity<>(orderService.getOrderById(id), HttpStatus.OK);
 
     }

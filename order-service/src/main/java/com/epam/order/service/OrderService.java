@@ -12,11 +12,11 @@ import com.epam.order.model.OrderResponse;
 public interface OrderService {
 
 
-    Order createOrder(@Valid OrderRequest order);
+    Order createOrder(OrderRequest order);
 
-    List<Order> getAllOrder();
+    List<OrderResponse> getAllOrder();
 
     OrderResponse getOrderById(String id);
 
-    boolean deleteOrderById(String id);
+    
 }

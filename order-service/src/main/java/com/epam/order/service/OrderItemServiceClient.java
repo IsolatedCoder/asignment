@@ -12,11 +12,11 @@ import com.epam.order.model.OrderItem;
 import com.epam.order.model.OrderItemRequest;
 
 @FeignClient(name="item-fetcher")
-public interface RemoteCallService {
+public interface OrderItemServiceClient {
 	@RequestMapping(method=RequestMethod.GET, value="/api/orderItem/{id}")
-	public List<OrderItem> getData(@PathVariable String id);
+	public List<OrderItem> getItemsFromOrderItem(@PathVariable String id);
 	
 	@RequestMapping(method=RequestMethod.POST, value="/api/orderItem")
-	public OrderItem postData(@RequestBody OrderItemRequest orderItem);
+	public OrderItem saveItemsInOrdeItem(@RequestBody OrderItemRequest orderItem);
 
 }

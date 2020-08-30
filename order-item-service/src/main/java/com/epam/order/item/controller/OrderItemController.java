@@ -2,9 +2,12 @@ package com.epam.order.item.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,13 +22,14 @@ import com.epam.order.item.service.OrderItemService;
 
 @RestController
 @RequestMapping("/api")
-public class OrderController {
+@Validated
+public class OrderItemController {
 
     @Autowired
     private OrderItemService orderService;
 
     @PostMapping("/orderItem")
-    public ResponseEntity<OrderItem> saveOrderItem(@RequestBody OrderItemRequest order) {
+    public ResponseEntity<OrderItem> saveOrderItem(@RequestBody@Valid OrderItemRequest order) {
 	return new ResponseEntity<>(orderService.createOrderItem(order), HttpStatus.OK);
     }
 
@@ -35,7 +39,7 @@ public class OrderController {
     }
 
     @GetMapping("/orderItem/{id}")
-    public ResponseEntity<List<OrderItems>> getOrderItemById(@PathVariable String id) {
+    public ResponseEntity<List<OrderItems>> getOrderItemById(@PathVariable(name ="id",required =true) String id) {
 	return new ResponseEntity<>(orderService.getOrderItemById(id), HttpStatus.OK);
 
     }
