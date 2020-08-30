@@ -44,7 +44,7 @@ public class OrderControllerTest {
         order.setCustomerName("customer");
         orderList.add(order);
 
-        when(orderService.getAllOrder()).thenReturn(orderList);
+        when(orderService.getAllOrderDetails()).thenReturn(orderList);
         mvc.perform(MockMvcRequestBuilders
                 .get("/api/order")
                 .accept(MediaType.APPLICATION_JSON))

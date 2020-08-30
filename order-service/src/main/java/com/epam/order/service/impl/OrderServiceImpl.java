@@ -29,7 +29,7 @@ public class OrderServiceImpl implements OrderService {
     private OrderItemServiceClient service;
 
     @Override
-    public Order createOrder(OrderRequest orderRequest) {
+    public Order saveOrderDetails(OrderRequest orderRequest) {
 
 	String uniqueId = UUID.randomUUID().toString();
 	Order order = new Order(uniqueId, orderRequest.getCustomerName(), orderRequest.getDate(),
@@ -42,7 +42,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderResponse> getAllOrder() {
+    public List<OrderResponse> getAllOrderDetails() {
 	List<Order> list = (List<Order>) orderRepostiroty.findAll();
 
 	List<OrderResponse> returnList = new ArrayList<OrderResponse>();
@@ -67,7 +67,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderResponse getOrderById(String id) {
+    public OrderResponse getOrderDetailsById(String id) {
 	OrderResponse resp = new OrderResponse();
 	Optional<Order> dbOrder = orderRepostiroty.findById(id);
 	List<OrderItem> list = service.getItemsFromOrderItem(id);

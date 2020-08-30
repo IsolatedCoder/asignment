@@ -2,10 +2,11 @@ package com.epam.order.item.exception.handler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.epam.order.item.exception.OrderNotFoundException;
+import com.epam.order.item.exception.OrderItemNotFoundException;
 
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import org.slf4j.Logger;
@@ -17,10 +18,16 @@ public class GlobalExceptionHandler {
     
     
     
-    @ExceptionHandler({ OrderNotFoundException.class })
-    public ResponseEntity<String> handleRunTimeException(OrderNotFoundException e) {
+    @ExceptionHandler({ OrderItemNotFoundException.class })
+    public ResponseEntity<String> handleOrderNotFoundException(OrderItemNotFoundException e) {
 	 
 	return error(HttpStatus.NO_CONTENT, e);
+    }
+    
+    @ExceptionHandler({ MethodArgumentNotValidException.class })
+    public ResponseEntity<String> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+	 
+	return error(HttpStatus.BAD_REQUEST, e);
     }
     
     @ExceptionHandler({ RuntimeException.class })

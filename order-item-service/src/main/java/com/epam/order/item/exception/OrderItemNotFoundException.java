@@ -1,6 +1,6 @@
 package com.epam.order.item.exception;
 
-public class OrderNotFoundException extends RuntimeException{
+public class OrderItemNotFoundException extends RuntimeException{
     
     /**
      * 
@@ -8,7 +8,7 @@ public class OrderNotFoundException extends RuntimeException{
     private static final long serialVersionUID = 1L;
     private String message;
     
-    public OrderNotFoundException(String message) {
+    public OrderItemNotFoundException(String message) {
 	super(message);
     }
 

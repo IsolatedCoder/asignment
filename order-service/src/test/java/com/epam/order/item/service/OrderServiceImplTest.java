@@ -38,7 +38,7 @@ public class OrderServiceImplTest {
 
         Mockito.when(orderRepostiroty.findAll()).thenReturn(orderList);
 
-        List<OrderResponse> returnedOrderList = orderService.getAllOrder();
+        List<OrderResponse> returnedOrderList = orderService.getAllOrderDetails();
         assertEquals(returnedOrderList.size(), orderList.size());
 
 

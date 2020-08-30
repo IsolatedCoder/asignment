@@ -29,17 +29,17 @@ public class OrderController {
 
     @PostMapping("/order")
     public ResponseEntity<Order> saveOrder(@RequestBody@Valid OrderRequest order) {
-        return new ResponseEntity<>(orderService.createOrder(order), HttpStatus.OK);
+        return new ResponseEntity<>(orderService.saveOrderDetails(order), HttpStatus.OK);
     }
 
     @GetMapping("/order")
     public ResponseEntity<List<OrderResponse>> getAllOrder() {
-        return new ResponseEntity<>(orderService.getAllOrder(), HttpStatus.OK);
+        return new ResponseEntity<>(orderService.getAllOrderDetails(), HttpStatus.OK);
     }
 
     @GetMapping("/order/{id}")
     public ResponseEntity<OrderResponse> getOrderById(@PathVariable(name ="sid", required =true) String id) {
-        return new ResponseEntity<>(orderService.getOrderById(id), HttpStatus.OK);
+        return new ResponseEntity<>(orderService.getOrderDetailsById(id), HttpStatus.OK);
 
     }
 

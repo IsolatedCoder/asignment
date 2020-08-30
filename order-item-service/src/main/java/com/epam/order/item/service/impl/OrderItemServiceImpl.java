@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import com.epam.order.item.entity.OrderItem;
+import com.epam.order.item.exception.OrderItemNotFoundException;
 import com.epam.order.item.model.OrderItemRequest;
 import com.epam.order.item.model.OrderItems;
 import com.epam.order.item.repository.OrderItemRepostiroty;
@@ -43,6 +44,9 @@ public class OrderItemServiceImpl implements OrderItemService {
         List<OrderItems> items = new ArrayList<OrderItems>();
         if(!CollectionUtils.isEmpty(dbOrder)) {
             items= dbOrder.stream().map(item->new OrderItems(  item.getProductCode(), item.getProductName(), item.getQuantity())).collect(Collectors.toList())  ; 
+        }
+        else {
+            throw new OrderItemNotFoundException("Order items not available :::"+id);
         }
         return items;
     }

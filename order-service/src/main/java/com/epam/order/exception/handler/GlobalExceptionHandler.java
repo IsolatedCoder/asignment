@@ -2,6 +2,7 @@ package com.epam.order.exception.handler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -17,11 +18,16 @@ public class GlobalExceptionHandler {
     
     
     @ExceptionHandler({ OrderNotFoundException.class })
-    public ResponseEntity<String> handleRunTimeException(OrderNotFoundException e) {
+    public ResponseEntity<String> handleOrderNotFoundException(OrderNotFoundException e) {
 	 
 	return error(HttpStatus.NO_CONTENT, e);
     }
     
+    @ExceptionHandler({ MethodArgumentNotValidException.class })
+    public ResponseEntity<String> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+	 
+	return error(HttpStatus.BAD_REQUEST, e);
+    }
     @ExceptionHandler({ RuntimeException.class })
     public ResponseEntity<String> handleRunTimeException(RuntimeException e) {
 	 
