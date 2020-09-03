@@ -6,13 +6,13 @@ import org.springframework.util.CollectionUtils;
 
 import com.epam.order.entity.Order;
 import com.epam.order.exception.model.OrderNotFoundException;
+import com.epam.order.feign.impl.OrderItemServiceClient;
 import com.epam.order.model.OrderItem;
 import com.epam.order.model.OrderItemRequest;
 import com.epam.order.model.OrderRequest;
 import com.epam.order.model.OrderResponse;
 import com.epam.order.repository.OrderRepostiroty;
 import com.epam.order.service.OrderService;
-import com.epam.order.service.OrderItemServiceClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ public class OrderServiceImpl implements OrderService {
     private OrderRepostiroty orderRepostiroty;
 
     @Autowired
-    private OrderItemServiceClient service;
+    private OrderItemServiceClient feignClientService;
 
     @Override
     public Order saveOrderDetails(OrderRequest orderRequest) {
@@ -35,7 +35,7 @@ public class OrderServiceImpl implements OrderService {
 	Order order = new Order(uniqueId, orderRequest.getCustomerName(), orderRequest.getDate(),
 		orderRequest.getShippingAddress(), orderRequest.getTotal());
 	orderRequest.getOrderItems().forEach(item -> {
-	    service.saveItemsInOrdeItem(
+	    feignClientService.saveItemsInOrdeItem(
 		    new OrderItemRequest(uniqueId, item.getProductCode(), item.getProductName(), item.getQuantity()));
 	});
 	return orderRepostiroty.save(order);
@@ -49,7 +49,7 @@ public class OrderServiceImpl implements OrderService {
 	for (Order order : list) {
 	    OrderResponse resp = new OrderResponse();
 
-	    List<OrderItem> itrmList = service.getItemsFromOrderItem(order.getId());
+	    List<OrderItem> itrmList = feignClientService.getItemsFromOrderItem(order.getId());
 
 	    if (order != null && !CollectionUtils.isEmpty(itrmList)) {
 		resp.setOrderItems(itrmList);
@@ -70,7 +70,7 @@ public class OrderServiceImpl implements OrderService {
     public OrderResponse getOrderDetailsById(String id) {
 	OrderResponse resp = new OrderResponse();
 	Optional<Order> dbOrder = orderRepostiroty.findById(id);
-	List<OrderItem> list = service.getItemsFromOrderItem(id);
+	List<OrderItem> list = feignClientService.getItemsFromOrderItem(id);
 	Order order = dbOrder.orElse(null);
 	if (order != null && !CollectionUtils.isEmpty(list)) {
 	    resp.setOrderItems(list);

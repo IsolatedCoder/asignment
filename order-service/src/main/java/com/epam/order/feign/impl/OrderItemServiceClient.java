@@ -1,4 +1,4 @@
-package com.epam.order.service;
+package com.epam.order.feign.impl;
 
 import java.util.List;
 

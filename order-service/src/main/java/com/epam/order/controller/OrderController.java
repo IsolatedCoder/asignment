@@ -27,12 +27,12 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @PostMapping("/order")
+    @PostMapping("/orders")
     public ResponseEntity<Order> saveOrder(@RequestBody@Valid OrderRequest order) {
         return new ResponseEntity<>(orderService.saveOrderDetails(order), HttpStatus.OK);
     }
 
-    @GetMapping("/order")
+    @GetMapping("/orders")
     public ResponseEntity<List<OrderResponse>> getAllOrder() {
         return new ResponseEntity<>(orderService.getAllOrderDetails(), HttpStatus.OK);
     }

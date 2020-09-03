@@ -26,21 +26,21 @@ import com.epam.order.item.service.OrderItemService;
 public class OrderItemController {
 
     @Autowired
-    private OrderItemService orderService;
+    private OrderItemService orderItemService;
 
-    @PostMapping("/orderItem")
+    @PostMapping("/orderItems")
     public ResponseEntity<OrderItem> saveOrderItem(@RequestBody@Valid OrderItemRequest order) {
-	return new ResponseEntity<>(orderService.createOrderItem(order), HttpStatus.OK);
+	return new ResponseEntity<>(orderItemService.createOrderItem(order), HttpStatus.OK);
     }
 
-    @GetMapping("/orderItem")
+    @GetMapping("/orderItems")
     public ResponseEntity<List<OrderItem>> getAllOrderItems() {
-	return new ResponseEntity<>(orderService.getAllOrderItem(), HttpStatus.OK);
+	return new ResponseEntity<>(orderItemService.getAllOrderItem(), HttpStatus.OK);
     }
 
-    @GetMapping("/orderItem/{id}")
+    @GetMapping("/orderItems/{id}")
     public ResponseEntity<List<OrderItems>> getOrderItemById(@PathVariable(name ="id",required =true) String id) {
-	return new ResponseEntity<>(orderService.getOrderItemById(id), HttpStatus.OK);
+	return new ResponseEntity<>(orderItemService.getOrderItemById(id), HttpStatus.OK);
 
     }
 
